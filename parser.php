@@ -65,34 +65,37 @@
                   return $title;
               }
 
-                    if ((filter_has_var(INPUT_POST, 'urls') &&
-                    (strlen(filter_input(INPUT_POST, 'urls')) > 0))) {
-                        $urls = htmlentities($_POST['urls']);
-                        $urls = explode("\n", $_POST['urls']);
-                        $urls = array_map('trim', $urls);
-                        $urls = array_filter($urls);
+              $error = '';
 
-                        $count = 1;
+              if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                  if (!empty($_POST['urls'])) {
+                      $urls = htmlentities($_POST['urls']);
+                      $urls = explode("\n", $_POST['urls']);
+                      $urls = array_map('trim', $urls);
+                      $urls = array_filter($urls);
 
-                        foreach ($urls as $url) {
-                            $url = trim($url);
-                            if (filter_var($url, FILTER_VALIDATE_URL)) {
-                                $title = getTitle($url);
+                      $count = 1;
 
-                                if ($title === false) {
-                                    continue;
-                                }
+                      foreach ($urls as $url) {
+                          $url = trim($url);
+                          if (filter_var($url, FILTER_VALIDATE_URL)) {
+                              $title = getTitle($url);
 
-                                echo '<p>'.$count.'. <a href="'.$url.'">'.$title.'</a><br>'.$url.'</p>';
+                              if ($title === false) {
+                                  continue;
+                              }
 
-                                ++$count;
-                            } else {
-                                trigger_error('You must enter URLs.  Please check your input and try again.', E_USER_ERROR);
-                            }
-                        }
-                    } else {
-                        echo '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning:</strong> You must enter at least one URL.</div>';
-                    }
+                              echo '<p>'.$count.'. <a href="'.$url.'">'.$title.'</a><br>'.$url.'</p>';
+
+                              ++$count;
+                          } else {
+                              trigger_error('You must enter URLs.  Please check your input and try again.', E_USER_ERROR);
+                          }
+                      }
+                  } else {
+                      echo '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning:</strong> You must enter at least one URL.</div>';
+                  }
+              }
 
             ?>
 

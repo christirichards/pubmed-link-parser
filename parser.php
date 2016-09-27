@@ -22,17 +22,17 @@
       <div class="jumbotron">
             <div class="container">
               <h1>PubMed Link Parser</h1>
-              <p>Simple parser that grabs the title from each PubMed link and organizes them into a numbered list.</p>
+              <p>Simple parser that grabs the title from each PubMed link and organizes them into numbered batches of 30.</p>
               <form method="POST" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']);?>">
                   <div class="form-group">
                     <?php echo $error;?>
-                    <textarea class="form-control" rows="5" name="urls" placeholder="Paste your URLs (one on each line) and click submit."></textarea>
+                    <textarea class="form-control" rows="5" name="urls" placeholder="Paste your URLs (one on each line) and click Parse Links."></textarea>
                   </div>
                   <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg btn-block">Parse Links</button>
               </form>
             </div>
           </div>
-    <div class="container">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
 
@@ -40,7 +40,6 @@
 
               function getTitle($url)
               {
-                  //echo $url;
                   $results = file_get_contents($url);
                   if (!$results) {
                       return;
@@ -52,10 +51,10 @@
                   }
 
                   $title = preg_replace('/\s+/', ' ', $title_matches[1]);
+                  $title = mb_convert_encoding($title, 'UTF-8', 'UTF-8');
 
                   $host = parse_url($url, PHP_URL_HOST);
 
-                  // Remove unnecessary info from the title
                   if ($host == 'www.ncbi.nlm.nih.gov') {
                       $title = strstr($title, ' - PubMed - NCBI', true);
                   }
@@ -69,33 +68,42 @@
 
               if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   if (!empty($_POST['urls'])) {
-                      $urls = htmlentities($_POST['urls']);
-                      $urls = explode("\n", $_POST['urls']);
-                      $urls = array_map('trim', $urls);
+                      $urls = explode(PHP_EOL, $_POST['urls']);
+                      //$urls = array_map('trim', $urls);
                       $urls = array_filter($urls);
 
-                      $count = 1;
+                      $batch_count = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth'];
 
-                      foreach ($urls as $url) {
-                          $url = trim($url);
-                          if (filter_var($url, FILTER_VALIDATE_URL)) {
-                              $title = getTitle($url);
+                      $i=1;
 
-                              if ($title === false) {
-                                  continue;
+                      foreach (array_chunk($urls, 30, true) as $i=>$url) {
+                          echo '<div class="col-md-4">';
+                          echo '<h3>'.$batch_count[$i].' Batch</h3>';
+                          $count = 1;
+                          foreach ($url as $test) {
+                              $test = trim($test);
+                              if (filter_var($test, FILTER_VALIDATE_URL)) {
+                                  $title = getTitle($test);
+
+                                  if ($title === false) {
+                                      continue;
+                                  }
+
+                                  echo '<p>'.$count.'. <a href="'.$test.'">'.$title.'</a><br>'.$test.'</p>';
+
+                                  ++$count;
+                              } else {
+                                  trigger_error('You must enter URLs.  Please check your input and try again.', E_USER_ERROR);
                               }
-
-                              echo '<p>'.$count.'. <a href="'.$url.'">'.$title.'</a><br>'.$url.'</p>';
-
-                              ++$count;
-                          } else {
-                              trigger_error('You must enter URLs.  Please check your input and try again.', E_USER_ERROR);
                           }
+                          echo '</div>';
                       }
                   } else {
                       echo '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning:</strong> You must enter at least one URL.</div>';
                   }
               }
+
+
 
             ?>
 

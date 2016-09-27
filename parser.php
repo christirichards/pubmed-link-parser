@@ -36,62 +36,51 @@
       <div class="row">
         <div class="col-md-12">
 
-            <?php
+        <?php
 
-              function getTitle($url)
-              {
-                  $results = file_get_contents($url);
-                  if (!$results) {
-                      return;
-                  }
+            include_once('inc/simple_html_dom.php');
 
-                  $res = preg_match("/<title>(.*)<\/title>/siU", $results, $title_matches);
-                  if (!$res) {
-                      return;
-                  }
+            function getTitle($url, $tagname)
+            {
+                $values = array();
+                $html = file_get_html($url);
+                foreach ($html->find($tagname) as $tag) {
+                    $values[] = trim($tag->innertext);
+                }
 
-                  $title = preg_replace('/\s+/', ' ', $title_matches[1]);
-                  $title = mb_convert_encoding($title, 'UTF-8', 'UTF-8');
-
-                  $host = parse_url($url, PHP_URL_HOST);
-
-                  if ($host == 'www.ncbi.nlm.nih.gov') {
-                      $title = strstr($title, ' - PubMed - NCBI', true);
-                  }
-
-                  $title = trim($title);
-
-                  return $title;
-              }
+                return $values;
+            }
 
               $error = '';
 
               if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                   if (!empty($_POST['urls'])) {
                       $urls = explode(PHP_EOL, $_POST['urls']);
-                      //$urls = array_map('trim', $urls);
+
+                      // Just in case there is a blank line
+                      $urls = array_map('trim', $urls);
                       $urls = array_filter($urls);
 
                       $batch_count = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth'];
 
-                      $i=1;
+                      $batch_number=1;
 
-                      foreach (array_chunk($urls, 30, true) as $i=>$url) {
+                      foreach (array_chunk($urls, 30, true) as $batch_number=>$batch) {
                           echo '<div class="col-md-4">';
-                          echo '<h3>'.$batch_count[$i].' Batch</h3>';
-                          $count = 1;
-                          foreach ($url as $test) {
-                              $test = trim($test);
-                              if (filter_var($test, FILTER_VALIDATE_URL)) {
-                                  $title = getTitle($test);
+                          echo '<h3>'.$batch_count[$batch_number].' Batch</h3>';
+                          $url_count = 1;
+                          foreach ($batch as $url) {
+                              $url = trim($url);
+                              if (filter_var($url, FILTER_VALIDATE_URL)) {
+                                  $title = getTitle($url, "h1");
 
                                   if ($title === false) {
                                       continue;
                                   }
 
-                                  echo '<p>'.$count.'. <a href="'.$test.'">'.$title.'</a><br>'.$test.'</p>';
+                                  echo '<p>'.$url_count.'. <a href="'.$url.'">'.$title[1].'</a><br>'.$url.'</p>';
 
-                                  ++$count;
+                                  ++$url_count;
                               } else {
                                   trigger_error('You must enter URLs.  Please check your input and try again.', E_USER_ERROR);
                               }
@@ -113,7 +102,7 @@
 
     <footer class="footer">
         <div class="container">
-            <span class="text-muted text-center">Made with <i class="fa fa-heart pink"></i> by <a href="https://christirichards.com" title="ChristiRichards.com" target="_blank">Christi Richards</a></span>
+            <span class="text-muted">Made with <i class="fa fa-heart pink"></i> by <a href="https://christirichards.com" title="ChristiRichards.com" target="_blank">Christi Richards</a></span>
         </div>
     </footer>
 

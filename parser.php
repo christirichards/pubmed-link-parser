@@ -38,7 +38,7 @@
 
         <?php
 
-            include_once('inc/simple_html_dom.php');
+            include_once 'inc/simple_html_dom.php';
 
             function getTitle($url, $tagname)
             {
@@ -63,16 +63,16 @@
 
                       $batch_count = ['First', 'Second', 'Third', 'Fourth', 'Fifth', 'Sixth', 'Seventh', 'Eighth', 'Ninth', 'Tenth'];
 
-                      $batch_number=1;
+                      $batch_number = 1;
 
-                      foreach (array_chunk($urls, 30, true) as $batch_number=>$batch) {
+                      foreach (array_chunk($urls, 30, true) as $batch_number => $batch) {
                           echo '<div class="col-md-4">';
-                          echo '<h3>'.$batch_count[$batch_number].' Batch</h3>';
+                          echo '<h3>'.$batch_count[$batch_number].' Batch <button class="btn btn-sm btn-secondary pull-xs-right" data-clipboard-target="#'.$batch_count[$batch_number].'"><img src="img/clipboard.svg" class="clipboard"></button></h3><div id="'.$batch_count[$batch_number].'">';
                           $url_count = 1;
                           foreach ($batch as $url) {
                               $url = trim($url);
                               if (filter_var($url, FILTER_VALIDATE_URL)) {
-                                  $title = getTitle($url, "h1");
+                                  $title = getTitle($url, 'h1');
 
                                   if ($title === false) {
                                       continue;
@@ -85,14 +85,12 @@
                                   trigger_error('You must enter URLs.  Please check your input and try again.', E_USER_ERROR);
                               }
                           }
-                          echo '</div>';
+                          echo '</div></div>';
                       }
                   } else {
                       echo '<div class="alert alert-danger"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a><strong>Warning:</strong> You must enter at least one URL.</div>';
                   }
               }
-
-
 
             ?>
 
@@ -102,13 +100,46 @@
 
     <footer class="footer">
         <div class="container">
-            <span class="text-muted">Made with <i class="fa fa-heart pink"></i> by <a href="https://christirichards.com" title="ChristiRichards.com" target="_blank">Christi Richards</a></span>
+            <p class="text-center"><span class="text-muted">Made with <i class="fa fa-heart pink"></i> by <a href="https://christirichards.com" title="ChristiRichards.com" target="_blank">Christi Richards</a></span></p>
         </div>
     </footer>
 
        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" integrity="sha384-THPy051/pYDQGanwU6poAc/hOdQxjnOEXzbT+OuUAFqNqFjL+4IGLBgCJC3ZOShY" crossorigin="anonymous"></script>
        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.2.0/js/tether.min.js" integrity="sha384-Plbmg8JY28KFelvJVai01l8WyZzrYWG825m+cZ0eDDS1f7d/js6ikvy1+X+guPIB" crossorigin="anonymous"></script>
        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.4/js/bootstrap.min.js" integrity="VjEeINv9OSwtWFLAtmc4JCtEJXXBub00gtSnszmspDLCtC0I4z4nqz7rEFbIZLLU" crossorigin="anonymous"></script>
+       <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.5.12/clipboard.min.js"></script>
+
+       <script>
+       $('button').tooltip({
+           trigger: 'click',
+           placement: 'bottom'
+       });
+
+       function setTooltip(btn, message) {
+           $(btn).tooltip('hide')
+               .attr('data-original-title', message)
+               .tooltip('show');
+       }
+
+       function hideTooltip(btn) {
+           setTimeout(function() {
+               $(btn).tooltip('hide');
+           }, 1000);
+       }
+
+       var clipboard = new Clipboard('.btn');
+
+       clipboard.on('success', function(e) {
+           setTooltip(e.trigger, 'Copied!');
+           hideTooltip(e.trigger);
+       });
+
+       clipboard.on('error', function(e) {
+           setTooltip(e.trigger, 'Failed!');
+           hideTooltip(e.trigger);
+       });
+
+       </script>
 
   </body>
 </html>

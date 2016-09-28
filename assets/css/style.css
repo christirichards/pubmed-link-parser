@@ -7098,7 +7098,8 @@ h3 {
 	width: 100%;
 	height: 100%;
 	z-index: 9999;
-	background: url(img/preloader.gif) center no-repeat #ffffff;
+	background: url(../images/preloader.gif) center no-repeat #FFFFFF;
+    opacity: .95;
 }
 
 ::selection {

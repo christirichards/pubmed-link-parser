@@ -2,7 +2,7 @@
 
 ![](img/link-parser.png)
 
-The PubMed Link Parser allows you to enter one or more URLs from PubMed and grabs the results of the <h1> tag using the [Simple HTML DOM Parser](http://simplehtmldom.sourceforge.net/) library. The script currently dumps the results into numbered batches of thirty and includes an implementation of [Clipboard.js](https://clipboardjs.com/) to quickly copy the output batches to the clipboard for easy pasting into projects.
+The PubMed Link Parser allows you to enter one or more URLs from PubMed and grabs the results of the `<h1>` tag using the [Simple HTML DOM Parser](http://simplehtmldom.sourceforge.net/) library. The script currently dumps the results into numbered batches of thirty and includes an implementation of [Clipboard.js](https://clipboardjs.com/) to quickly copy the output batches to the clipboard for easy pasting into projects.
 
 (This was created for a friend at [NutritionFacts.org](http://nutritionfacts.org))
 

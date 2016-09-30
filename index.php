@@ -10,7 +10,7 @@
     <link rel="icon" href="favicon.ico">
 
     <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css">
 
     <title>PubMed Link Parser</title>
   </head>
@@ -39,7 +39,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p class="text-center"><span class="text-muted">Made with <i class="fa fa-heart pink"></i> by <a href="https://christirichards.com" title="ChristiRichards.com" target="_blank">Christi Richards</a></span></p>
+            <p class="text-center"><span class="text-muted">Made with <span class="octicon octicon-heart pink"></span> by <a href="https://christirichards.com" title="ChristiRichards.com" target="_blank">Christi Richards</a> | Contribute on <a href="https://github.com/christirichards/pubmed-link-parser/" target="_blank"><span class="octicon octicon-logo-github"></span></a></span></p>
         </div>
     </footer>
 

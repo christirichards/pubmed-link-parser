@@ -7055,8 +7055,8 @@ h3 {
     -webkit-appearance: none;
 }
 
-.clipboard {
-    width: 20px;
+.btn-secondary:hover {
+    color: #333333;
 }
 
 .single-batch {

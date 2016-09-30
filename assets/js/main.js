@@ -55,3 +55,18 @@ clipboard.on('error', function(e) {
     setTooltip(e.trigger, 'Failed!');
     hideTooltip(e.trigger);
 });
+
+$(document).on("click","#titles", function () {
+    $( ".title" ).toggle( "slow", function() {
+  });
+});
+
+$(document).on("click","#numbering", function () {
+    $( ".numbering" ).toggle( "slow", function() {
+  });
+});
+
+$(document).on("click","#links", function () {
+    $( ".link" ).toggle( "slow", function() {
+});
+});

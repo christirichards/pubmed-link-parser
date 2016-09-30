@@ -7055,7 +7055,7 @@ h3 {
     -webkit-appearance: none;
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover, .btn-secondary:focus {
     color: #333333;
 }
 

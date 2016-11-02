@@ -58,15 +58,20 @@ clipboard.on('error', function(e) {
 
 $(document).on("click","#titles", function () {
     $( ".title" ).toggle( "slow", function() {
+        $( ".title" ).toggleClass( "no-copy" );
   });
+
 });
 
 $(document).on("click","#numbering", function () {
     $( ".numbering" ).toggle( "slow", function() {
+        $( ".numbering").toggleClass( "no-copy" );
   });
 });
 
 $(document).on("click","#links", function () {
     $( ".link" ).toggle( "slow", function() {
+        $( ".link").toggleClass( "no-copy" );
+         $("br").remove();
 });
 });

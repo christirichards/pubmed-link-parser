@@ -1,0 +1,23 @@
+{
+  "name": "pubmed-link-parser",
+  "version": "1.0.0",
+  "description": "Allows you to enter one or more URLs from PubMed and grabs the results of the <h1> tag using the Simple HTML DOM Parser library",
+  "main": "index.php",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/christirichards/pubmed-link-parser.git"
+  },
+  "author": "Christi Richards",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/christirichards/pubmed-link-parser/issues"
+  },
+  "homepage": "https://github.com/christirichards/pubmed-link-parser#readme",
+  "devDependencies": {
+    "grunt": "~0.4.4",
+    "grunt-contrib-concat": "latest",
+    "grunt-contrib-cssmin": "latest",
+    "grunt-contrib-uglify": "latest",
+    "grunt-sync": "^0.6.2"
+  }
+}

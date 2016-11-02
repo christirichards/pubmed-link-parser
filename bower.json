@@ -1,0 +1,24 @@
+{
+  "name": "pubmed-link-parser",
+  "homepage": "https://github.com/christirichards/pubmed-link-parser",
+  "authors": [
+    "(Christi Richards <christi@christirichards.com>)"
+  ],
+  "description": "Allows you to enter one or more URLs from PubMed and grabs the results of the <h1> tag using the Simple HTML DOM Parser library",
+  "main": "index.php",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "octicons": "^5.0.1",
+    "jquery": "^3.1.1",
+    "clipboard": "^1.5.15"
+  }
+}

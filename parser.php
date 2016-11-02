@@ -1,4 +1,15 @@
 <?php
+/*------------------------------------------------------------------------------
+** File:        parser.php
+** Description: PubMed Link Parser
+** Version:     1.0.0
+** Updated:     November 2nd, 2016
+** Author:      Christi Richards
+** Homepage:    https://github.com/christirichards
+** Project:     https://github.com/christirichards/pubmed-link-parser
+**------------------------------------------------------------------------------
+** Created for NutritionFacts.org https://github.com/nutritionfactsorg
+**------------------------------------------------------------------------------ */
 
     include_once 'inc/simple_html_dom.php';
 
@@ -48,7 +59,8 @@
                               continue;
                           }
 
-                          echo '<p><span class="numbering">'.$url_count.'.</span> <a href="'.$url.'" class="link">'.$url.'</a><br /><span class="title">'.$title[1].'</span>';
+                          echo '<p><span class="numbering">'.$url_count.'.</span> <a href="'.$url.'" class="link">'.$url.'</a><br />
+                          <span class="title">'.$title[1].'</span></p>';
 
                           ++$url_count;
                       } else {

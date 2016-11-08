@@ -16,8 +16,21 @@
   </head>
 
   <body>
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="index.php" title="Pubmed Link Parser">Pubmed Link Parser</a>
+          </div>
+        </div>
+      </nav>
       <div class="preloader"></div>
-      <div class="jumbotron">
+      <div class="jumbotron text-center">
           <div class="container">
               <h1>PubMed Link Parser</h1>
               <p>Simple parser that grabs the page title from each PubMed page via URL and organizes them into numbered batches of 30.</p>
@@ -25,7 +38,7 @@
                   <div class="form-group">
                     <textarea class="form-control" rows="5" name="urls" placeholder="Paste your URLs (one on each line) and click Parse Links."></textarea>
                   </div>
-                  <button type="submit" name="submit" id="submit" class="btn btn-primary btn-lg btn-block">Parse Links</button>
+                  <button type="submit" name="submit" id="submit" class="btn btn-primary btn-block"><i class="octicon octicon-eye"></i>  Parse Links</button>
               </form>
             </div>
           </div>
@@ -39,7 +52,7 @@
 
     <footer class="footer">
         <div class="container">
-            <p class="text-center"><span class="text-muted">Made with <span class="octicon octicon-heart pink"></span> by <a href="https://christirichards.com" title="ChristiRichards.com" target="_blank">Christi Richards</a> | Contribute on <a href="https://github.com/christirichards/pubmed-link-parser/" target="_blank"><span class="octicon octicon-logo-github"></span></a></span></p>
+            <p class="text-center"><span class="text-muted"><span class="octicon octicon-code black"></span> with <span class="octicon octicon-heart pink"></span> by <a href="https://christirichards.com" title="ChristiRichards.com" target="_blank">Christi Richards</a> | Contribute on <a href="https://github.com/christirichards/pubmed-link-parser/" target="_blank"><span class="octicon octicon-logo-github"></span></a></span></p>
         </div>
     </footer>
 

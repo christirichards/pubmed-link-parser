@@ -8,7 +8,7 @@ The PubMed Link Parser allows you to enter one or more URLs from PubMed and grab
 
 ## Version
 
-1.0.0
+1.0.1
 
 ## Requirements
 

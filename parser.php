@@ -2,8 +2,8 @@
 /*------------------------------------------------------------------------------
 ** File:        parser.php
 ** Description: PubMed Link Parser
-** Version:     1.0.0
-** Updated:     November 7th, 2016
+** Version:     1.0.1
+** Updated:     November 23rd, 2016
 ** Author:      Christi Richards
 ** Homepage:    https://github.com/christirichards
 ** Project:     https://github.com/christirichards/pubmed-link-parser
